@@ -1,0 +1,79 @@
+ # Criando a tabela ALUNO
+  
+  CREATE TABLE ALUNO 
+  (
+  Nr_Rgm Number(8) not null,
+  Nm_Nome VARCHAR2(40) not null,
+  Nm_Pai VARCHAR2(40) not null,
+  Nm_Mae VARCHAR2(40) not null,
+  Dt_Nascimento DATE not null,
+  ID_Sexo CHAR(1) not null,
+  CONSTRAINT PK_RGM PRIMARY KEY (Nr_Rgm)
+  );
+  
+  # Criando a tabela CLASSE
+  
+  CREATE TABLE CLASSE
+  (
+    Cd_Classe NUMBER (8) not null,
+    Nr_AnoLetivo NUMBER (4) not null,
+    Nr_Serie NUMBER(2) not null,
+    Sg_Turma VARCHAR2(2) not null,
+    Cd_Escola NUMBER(6) not null,
+    Cd_Grau NUMBER(2) not null,
+    Cd_Periodo NUMBER(2) not null,
+    CONSTRAINT PK_CLASSE PRIMARY KEY (Cd_Classe)
+  );
+  
+  # Criando a tabela MATRICULA
+  
+  CREATE TABLE MATRICULA
+  (
+      Nr_Rgm NUMBER (8)not null,
+      Cd_Classe NUMBER(8)not null,
+      Dt_Matricula DATE not null,
+      
+      CONSTRAINT PK_MATRICULA PRIMARY KEY (Nr_Rgm, Dt_Matricula, Cd_Classe),
+      CONSTRAINT FK_MATRICULA_REF_ALUNO FOREIGN KEY (Nr_Rgm)
+        REFERENCES ALUNO(Nr_Rgm)
+  );
+		
+  # Inserindo dados na tabela ALUNO
+	
+	INSERT INTO ALUNO
+	(Nr_Rgm, Nm_Nome, Nm_Pai, Nm_Mae, Dt_Nascimento, ID_Sexo)
+	VALUES
+	(32159965,'Fabio','Rodrigo','Laysla', DATE '1993-02-01',1);
+	
+	
+  # Selecionando a tabela ALUNO
+  
+	Select * from ALUNO;
+	
+  # Inserindo dados na tabela CLASSE
+	
+	INSERT INTO CLASSE
+	(Cd_Classe, Nr_AnoLetivo, Nr_Serie, Sg_Turma, Cd_Escola, Cd_Grau, Cd_Periodo)
+	VALUES
+	(99533112, 4432, 01, 't2', 123456,02,02);
+  
+	# Selecionando a tabela CLASSE
+	
+	Select * From CLASSE
+	
+  # Inserindo dados na tabela MATRICULA
+  
+	INSERT INTO MATRICULA
+	(Nr_Rgm, Cd_Classe, Dt_Matricula)
+	Values
+	(32159965, 99444454, DATE '2022-03-01');
+	
+	# Selecionando a tabela MATRICULA
+	
+	Select * From MATRICULA
+	
+	
+	# Selecionando todas as tabelas, ja povoadas!
+	
+	
+	select * FROM ALUNO, MATRICULA, CLASSE
